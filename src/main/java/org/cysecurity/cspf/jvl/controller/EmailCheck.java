@@ -43,15 +43,18 @@ public class EmailCheck extends HttpServlet {
                Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
                String email=request.getParameter("email").trim();
                // Esapi encoder
-               Encoder esapiEncoder = new DefaultEncoder();
+               // Encoder esapiEncoder = new DefaultEncoder();
                // In-Line Sanitized
-	           String sanitizedEmail = esapiEncoder.encodeForSQL(new OracleCodec(), email);
+	           // String sanitizedEmail = esapiEncoder.encodeForSQL(new OracleCodec(), email);
+               String MySQLQuery = "SELECT * FROM users WHERE email = ? ";
+               PreparedStatement pstmt = connection.prepareStatement( MySQLQuery );
+               pstmt.setString( 1, email);
                JSONObject json=new JSONObject();
                 if(con!=null && !con.isClosed())
                 {
                     ResultSet rs=null;
                     Statement stmt = con.createStatement();  
-                    rs=stmt.executeQuery("select * from users where email='"+sanitizedEmail+"'");
+                    rs=pstmt.executeQuery( );
                     if (rs.next()) 
                     {  
                      json.put("available", "1"); 
