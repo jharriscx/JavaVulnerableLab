@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.cysecurity.cspf.jvl.model.DBConnect;
 import org.json.JSONObject;
+import org.owasp.esapi.ESAPI;
+import org.owasp.esapi.codecs.OracleCodec;
 
 /**
  *
@@ -40,6 +42,10 @@ public class EmailCheck extends HttpServlet {
         try {
                Connection con=new DBConnect().connect(getServletContext().getRealPath("/WEB-INF/config.properties"));
                String email=request.getParameter("email").trim();
+               // Esapi encoder
+               Encoder esapiEncoder = new DefaultEncoder();
+               // In-Line Sanitized
+	           email = esapiEncoder.encodeForSQL(new OracleCodec(), email);
                JSONObject json=new JSONObject();
                 if(con!=null && !con.isClosed())
                 {
