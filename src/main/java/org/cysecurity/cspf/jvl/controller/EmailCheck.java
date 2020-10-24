@@ -45,13 +45,13 @@ public class EmailCheck extends HttpServlet {
                // Esapi encoder
                Encoder esapiEncoder = new DefaultEncoder();
                // In-Line Sanitized
-	           email = esapiEncoder.encodeForSQL(new OracleCodec(), email);
+	           String sanitizedEmail = esapiEncoder.encodeForSQL(new OracleCodec(), email);
                JSONObject json=new JSONObject();
                 if(con!=null && !con.isClosed())
                 {
                     ResultSet rs=null;
                     Statement stmt = con.createStatement();  
-                    rs=stmt.executeQuery("select * from users where email='"+email+"'");
+                    rs=stmt.executeQuery("select * from users where email='"+sanitizedEmail+"'");
                     if (rs.next()) 
                     {  
                      json.put("available", "1"); 
