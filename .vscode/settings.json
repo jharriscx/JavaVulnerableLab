@@ -1,0 +1,11 @@
+{
+    "cx.server": {
+        "url": "http://localhost/",
+        "alias": "JHarris CxSAST ",
+        "username": "",
+        "password": "",
+        "project_id": 0,
+        "team_id": 0,
+        "project_name": ""
+    }
+}
