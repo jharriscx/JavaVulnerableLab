@@ -21,7 +21,7 @@ jobs:
     - name: Checkmarx CxFlow Action
       uses: checkmarx-ts/checkmarx-cxflow-github-action@v1.1
       with:
-        project: jharris_${{ github.event.repository.name }}
+        project: ${{ github.event.repository.name }}
         team: /CxServer
         checkmarx_url: ${{ secrets.CHECKMARX_URL }}
         checkmarx_username: ${{ secrets.CHECKMARX_USERNAME }}
